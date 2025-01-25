@@ -1,4 +1,7 @@
 ﻿
+using System.Runtime.Serialization.Formatters.Soap;
+using InformationCarrierFDS;
+
 namespace Serialize
 {
     public class SoapSerialize : ISerialize
@@ -11,9 +14,9 @@ namespace Serialize
             soap = new SoapFormatter();
             objects = (List<InfoCarrier>)soap.Deserialize(stream);
             Console.WriteLine("Десериализация успешно выполнена!");
-            foreach (var student in objects)
+            foreach (var obj in objects)
             {
-                student.Print();
+                obj.Report();
             }
             stream.Close();
         }

@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SoapFormatter" Version="1.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InformationCarrierFDS\InformationCarrierFDS.csproj" />
+  </ItemGroup>
+
 </Project>

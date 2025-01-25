@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
+using InformationCarrierFDS;
 
 namespace Serialize
 {
@@ -17,9 +18,9 @@ namespace Serialize
             stream = new FileStream(path, FileMode.Open);
             jsonFormatter = new DataContractJsonSerializer(typeof(List<InfoCarrier>));
             objects = jsonFormatter.ReadObject(stream) as List<InfoCarrier>;
-            foreach (var student in objects)
+            foreach (var obj in objects)
             {
-                student.Print();
+                obj.Report();
             }
             stream.Close();
         }

@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization.Formatters.Soap;
-
+using InformationCarrierFDS;
 /*
  Сериализация представляет процесс преобразования какого-либо объекта в поток байтов. 
  После преобразования мы можем этот поток байтов или записать на диск или сохранить его временно в памяти. 
@@ -39,7 +39,7 @@ namespace Serialize
 {
     public interface ISerialize
     {
-        void Save(string path, List<InfoCarrier> objects);
+        public void Save(string path, List<InfoCarrier> objects);
         public void Load(string path, List<InfoCarrier> objects);
     }
 }

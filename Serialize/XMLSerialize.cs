@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using InformationCarrierFDS;
 
 namespace Serialize
 {
@@ -18,9 +19,9 @@ namespace Serialize
             serializer = new XmlSerializer(typeof(List<InfoCarrier>));
             objects = serializer.Deserialize(stream) as List<InfoCarrier>;
             Console.WriteLine("Десериализация успешно выполнена!");
-            foreach (var student in objects)
+            foreach (var obj in objects)
             {
-                student.Print();
+                obj.Report();
             }
             stream.Close();
         }
