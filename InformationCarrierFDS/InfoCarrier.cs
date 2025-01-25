@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace С_FinalHw
+namespace InformationCarrierFDS
 {
     abstract class InfoCarrier
     {
@@ -29,11 +29,11 @@ namespace С_FinalHw
 
         public virtual void Load() 
         {
-            Console.WriteLine("Загрузка данных ");
+         
         }
         public virtual void Save() 
         {
-            Console.WriteLine("Сохранение данных ");
+        
         }
     }
 }

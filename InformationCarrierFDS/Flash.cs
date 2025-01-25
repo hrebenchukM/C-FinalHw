@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace С_FinalHw
+namespace InformationCarrierFDS
 {
     class Flash : InfoCarrier
     {
@@ -21,13 +21,11 @@ namespace С_FinalHw
 
         public override void Load()
         {
-            base.Load();
-            Console.WriteLine("на Flash-память {0} ",Manufacturer);
+            Console.WriteLine("Загрузка данных на Flash-память {0} ", Manufacturer);
         }
         public override void Save() 
         {
-          base.Save();
-          Console.WriteLine("на Flash-память {0} ", Manufacturer);
+          Console.WriteLine("Загрузка данных на Flash-память {0} ", Manufacturer);
 
         }
 
