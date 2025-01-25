@@ -7,7 +7,7 @@ using Serialize;
 
 namespace PriceList
 {
-    public class PriceList//класс, в котором инкапсулируется массив ссылок типа InfoCarrier
+    public class PriceListBoss//класс, в котором инкапсулируется массив ссылок типа InfoCarrier
     {
         List<InfoCarrier> objects = new List<InfoCarrier>();
 
@@ -17,7 +17,7 @@ namespace PriceList
             Console.WriteLine("• добавление носителя информации в список;");
             objects.Add(inf);
         }
-        //• удаление носителя информации из списка по заданному   критерию;
+        //• удаление носителя информации из списка по заданному критерию;
 
         //• печать списка;
         public void PrintList(ILog log)
@@ -40,12 +40,12 @@ namespace PriceList
         //• поиск носителя информации по заданному критерию;
 
         //• считывание данных из файла и запись данных в файл.
-        public void SaveFile(ISerialize serializer, string path)
+        public void SaveFile(string path, ISerialize serializer)
         {
             Console.WriteLine("• запись данных в файл ");
             serializer.Save(path, objects);
         }
-        public void LoadFile(ISerialize serializer, string path)
+        public void LoadFile(string path, ISerialize serializer)
         {
             Console.WriteLine("• считывание данных из файла ");
             serializer.Load(path,objects);

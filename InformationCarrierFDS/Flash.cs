@@ -29,7 +29,7 @@ namespace InformationCarrierFDS
         }
         public Flash() { }
 
-        public Flash(string man, string mod, string med, double cap, int c,int sp) : base( man,  mod,  med,  cap,  c) 
+        public Flash(string man, string mod, string med, double cap, int c, double sp) : base( man,  mod,  med,  cap,  c) 
         {
             SpeedUSB = sp;
         }

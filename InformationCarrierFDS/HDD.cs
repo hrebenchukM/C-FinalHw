@@ -12,7 +12,7 @@ namespace InformationCarrierFDS
     // класс съемный HDD.
     public class HDD : InfoCarrier
     {
-        //скорость записи.
+        //скорость вращения шпинделя
         [DataMember]
         protected int speedSpindle;
 

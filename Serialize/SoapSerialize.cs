@@ -8,6 +8,7 @@ namespace Serialize
     {
         SoapFormatter? soap = null;
         FileStream? stream = null;
+        public SoapSerialize() { }
         public void Load(string path, List<InfoCarrier> objects)
         {
             stream = new FileStream(path, FileMode.Open);

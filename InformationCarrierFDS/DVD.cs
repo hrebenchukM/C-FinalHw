@@ -12,7 +12,7 @@ namespace InformationCarrierFDS
     //• класс DVD - диск;
     public class DVD : InfoCarrier
     {
-        // скорость вращения шпинделя
+        // скорость записи
         [DataMember]
         protected int speedWrite;
 

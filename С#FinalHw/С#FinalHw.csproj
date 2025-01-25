@@ -12,4 +12,9 @@
     <PackageReference Include="SoapFormatter" Version="1.1.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Log\Log.csproj" />
+    <ProjectReference Include="..\PriceList\PriceList.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -13,6 +13,7 @@ namespace Serialize
     {
         DataContractJsonSerializer? jsonFormatter = null;
         FileStream? stream = null;
+        public JSONSerialize() { }
         public void  Load(string path, List<InfoCarrier> objects)
         {
             stream = new FileStream(path, FileMode.Open);

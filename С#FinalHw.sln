@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "С#FinalHw", "С#FinalHw\С#FinalHw.csproj", "{81B90DE8-64C7-4282-8F90-A161AA4B17F7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AB7290B2-56D8-4846-B605-68A553F8C844} = {AB7290B2-56D8-4846-B605-68A553F8C844}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InformationCarrierFDS", "InformationCarrierFDS\InformationCarrierFDS.csproj", "{7E9207DE-5D80-43F0-AB58-2809D5A958DA}"
 EndProject
