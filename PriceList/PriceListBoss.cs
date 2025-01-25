@@ -21,6 +21,7 @@ namespace PriceList
 
         //• печать списка;
         public void PrintList(ILog log)
+
         {
             if (objects.Count == 0)
             {
@@ -30,8 +31,8 @@ namespace PriceList
             Console.WriteLine("• печать списка;");
             foreach (var obj in objects)
             {
-                obj.Report();
-                log.Print("");
+                string report  = obj.Report();
+                log.Print(report);
             }
         }
 

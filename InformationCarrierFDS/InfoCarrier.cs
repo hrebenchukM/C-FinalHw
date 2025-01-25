@@ -14,6 +14,9 @@ namespace InformationCarrierFDS
     // для XML-сериализации необходим открытый доступ к классу
     [Serializable]
     [DataContract]
+    [KnownType(typeof(Flash))]
+    [KnownType(typeof(HDD))]
+    [KnownType(typeof(DVD))]
     // абстрактный класс «Носитель информации».
 
     public abstract class InfoCarrier
@@ -113,7 +116,7 @@ namespace InformationCarrierFDS
         //виртуальные методы формирования отчёта, загрузки данных и сохранения данных
         public virtual string Report()
         {
-            return "Manufacturer: " + Manufacturer + ", Model: " + Model + ", MediaName: " + MediaName + ", Capacity: " + Capacity + "GB, Count: " + Count;
+            return "Manufacturer: " + Manufacturer + ", Model: " + Model + ", MediaName: " + MediaName + ", Capacity: " + Capacity + "GB, Count: " + Count + ", ";
         }
 
         public virtual void Load() 

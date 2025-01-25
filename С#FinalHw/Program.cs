@@ -126,7 +126,7 @@ internal class Program
 
 
                     priceList.LoadFile(pathL, serializerL);
-                    Console.WriteLine("Загружено:");
+                    Console.WriteLine("Загружено.");
 
                     break;
 

@@ -18,12 +18,17 @@ namespace Serialize
         {
             stream = new FileStream(path, FileMode.Open);
             jsonFormatter = new DataContractJsonSerializer(typeof(List<InfoCarrier>));
-            objects = jsonFormatter.ReadObject(stream) as List<InfoCarrier>;
-            foreach (var obj in objects)
+            
+            var loadObjects = jsonFormatter.ReadObject(stream) as List<InfoCarrier>;
+            Console.WriteLine("Десериализация успешно выполнена!");
+       
+            objects.Clear();
+            foreach (var obj in loadObjects)
             {
-                obj.Report();
+              objects.Add(obj);
             }
             stream.Close();
+
         }
 
         public void Save(string path, List<InfoCarrier> objects)

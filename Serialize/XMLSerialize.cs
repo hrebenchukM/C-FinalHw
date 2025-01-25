@@ -18,11 +18,12 @@ namespace Serialize
         {
             stream = new FileStream(path, FileMode.Open);
             serializer = new XmlSerializer(typeof(List<InfoCarrier>));
-            objects = serializer.Deserialize(stream) as List<InfoCarrier>;
+            var loadObjects = serializer.Deserialize(stream) as List<InfoCarrier>;
             Console.WriteLine("Десериализация успешно выполнена!");
-            foreach (var obj in objects)
+            objects.Clear();
+            foreach (var obj in loadObjects)
             {
-                obj.Report();
+                objects.Add(obj);
             }
             stream.Close();
         }

@@ -13,11 +13,12 @@ namespace Serialize
         {
             stream = new FileStream(path, FileMode.Open);
             soap = new SoapFormatter();
-            objects = (List<InfoCarrier>)soap.Deserialize(stream);
+            var loadObjects = (List<InfoCarrier>)soap.Deserialize(stream);
             Console.WriteLine("Десериализация успешно выполнена!");
-            foreach (var obj in objects)
+            objects.Clear();
+            foreach (var obj in loadObjects)
             {
-                obj.Report();
+                objects.Add(obj);
             }
             stream.Close();
         }
