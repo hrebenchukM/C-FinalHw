@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InformationCarrierFDS
 {
-    abstract class InfoCarrier
+    public abstract class InfoCarrier
     {
         public string Manufacturer { get; set; }
         public string Model { get; set; }

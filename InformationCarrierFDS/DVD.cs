@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InformationCarrierFDS
 {
-    class DVD : InfoCarrier
+    public class DVD : InfoCarrier
     {
         public int SpeedWrite { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InformationCarrierFDS
 {
-    class HDD : InfoCarrier
+    public class HDD : InfoCarrier
     {
         public int SpeedSpindle { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InformationCarrierFDS
 {
-    class Flash : InfoCarrier
+    public class Flash : InfoCarrier
     {
         public int SpeedUSB { get; set; }
 

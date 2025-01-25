@@ -8,10 +8,17 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InformationCarrierFDS", "InformationCarrierFDS\InformationCarrierFDS.csproj", "{7E9207DE-5D80-43F0-AB58-2809D5A958DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceList", "PriceList\PriceList.csproj", "{AB7290B2-56D8-4846-B605-68A553F8C844}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5281BD2E-0234-49E6-B8C8-C6318FB2CA5F} = {5281BD2E-0234-49E6-B8C8-C6318FB2CA5F}
+		{7E9207DE-5D80-43F0-AB58-2809D5A958DA} = {7E9207DE-5D80-43F0-AB58-2809D5A958DA}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log", "Log\Log.csproj", "{5281BD2E-0234-49E6-B8C8-C6318FB2CA5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialize", "Serialize\Serialize.csproj", "{F904AFDC-2C0F-43AF-BB26-CACAF064DDCA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7E9207DE-5D80-43F0-AB58-2809D5A958DA} = {7E9207DE-5D80-43F0-AB58-2809D5A958DA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
