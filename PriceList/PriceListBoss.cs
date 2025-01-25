@@ -18,6 +18,11 @@ namespace PriceList
             objects.Add(inf);
         }
         //• удаление носителя информации из списка по заданному критерию;
+        public void RemoveByCriterion()
+        {
+          
+        }
+
 
         //• печать списка;
         public void PrintList(ILog log)
