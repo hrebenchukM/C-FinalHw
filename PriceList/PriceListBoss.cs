@@ -210,7 +210,6 @@ namespace PriceList
                     {
                         InfoCarrier inf = null;
 
-                        // Определяем тип носителя
                         switch (line)
                         {
                             case "Flash":
@@ -226,7 +225,6 @@ namespace PriceList
                                 throw new Exception($"Неизвестный тип носителя данных: {line}");
                         }
 
-                        // Загружаем данные
                         if (inf != null)
                         {
                             inf.Load(sr);
