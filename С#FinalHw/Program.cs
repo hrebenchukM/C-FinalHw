@@ -79,19 +79,51 @@ internal class Program
                     priceList.Add(obj);
                     break;
 
-                case "2"://Удаление носителя информации из списка по заданному критерию
+                case "2": // Удаление носителя информации из списка по заданному критерию
+                        Console.WriteLine("Введите название критерия (например: Model, Manufacturer, MediaName, Capacity, Count, SpeedUSB, SpeedWrite, SpeedSpindle): ");
+                        string criterionNameD = Console.ReadLine();
 
-                    break;
+                        Console.WriteLine("Введите значение для критерия {0}: ", criterionNameD);
+                        string criterionValueD = Console.ReadLine();
+
+                        priceList.RemoveCarrierByCriterion(criterionNameD, criterionValueD);
+                        break;
+
 
                 case "3"://Печать списка
                     priceList.PrintList(log);
-                    break;
+                break;
 
                 case "4"://Изменение определённых параметров носителя информации
-                    break;
+                        Console.WriteLine("Введите название критерия для поиска (например: Model, Manufacturer, MediaName, Capacity, Count, SpeedUSB, SpeedWrite, SpeedSpindle): ");
+                        string criterionNameES = Console.ReadLine();
+
+                        Console.WriteLine("Введите значение для критерия {0}: ", criterionNameES);
+                        string criterionValueES = Console.ReadLine();
+
+                        Console.WriteLine("Введите название критерия, которое хотите изменить (например: Model, Manufacturer, MediaName, Capacity, Count, SpeedUSB, SpeedWrite, SpeedSpindle): ");
+                        string criterionNameE = Console.ReadLine();
+
+                        Console.WriteLine("Введите новое значение для критерия {0}: ", criterionNameE);
+                        string criterionValueE = Console.ReadLine();
+
+                        priceList.EditInfo(criterionNameES, criterionValueES, criterionNameE, criterionValueE);
+                break;
 
                 case "5"://Поиск носителя информации по заданному критерию
-                    break;
+                        Console.WriteLine("Введите название критерия (например: Model, Manufacturer, MediaName, Capacity, Count, SpeedUSB, SpeedWrite, SpeedSpindle): ");
+                        string criterionNameS = Console.ReadLine();
+
+                        Console.WriteLine("Введите значение для критерия {0}: ", criterionNameS);
+                        string criterionValueS = Console.ReadLine();
+
+                        var resS = priceList.SearchCarrierByCriterion(criterionNameS, criterionValueS);
+
+                        foreach (var carrier in resS)
+                        {
+                            Console.WriteLine(carrier.Report());
+                        }
+                        break;
 
 
                 case "6"://Считывание данных из файла

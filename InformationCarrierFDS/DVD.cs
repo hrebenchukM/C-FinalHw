@@ -13,9 +13,9 @@ namespace InformationCarrierFDS
     public class DVD : InfoCarrier
     {
         // скорость записи
-        [DataMember]
         protected int speedWrite;
 
+        [DataMember]
         public int SpeedWrite
         {
             get
@@ -27,7 +27,7 @@ namespace InformationCarrierFDS
                 speedWrite = value;
             }
         }
-
+        // для XML-сериализации необходим конструктор по умолчанию
         public DVD() {}
         public DVD(string man, string mod, string med, double cap, int c, int sp) : base(man, mod, med, cap, c)
         {

@@ -13,32 +13,33 @@ namespace InformationCarrierFDS
 {
     // для XML-сериализации необходим открытый доступ к классу
     [Serializable]
-    [DataContract]
+    [XmlRoot("InfoCarrier")]
+    [XmlInclude(typeof(Flash))]
+    [XmlInclude(typeof(HDD))]
+    [XmlInclude(typeof(DVD))]
+
     [KnownType(typeof(Flash))]
     [KnownType(typeof(HDD))]
     [KnownType(typeof(DVD))]
+    [DataContract]
     // абстрактный класс «Носитель информации».
 
     public abstract class InfoCarrier
     {
         //имя производителя,  
-        [DataMember]
         protected string manufacturer;
         // модель,
-        [DataMember]
         protected string model;
         //наименование,
-        [DataMember]
         protected string media_name;
         // ёмкость носителя,
-        [DataMember]
         protected double capacity;
         // количество
-        [DataMember]
         protected int count;
 
 
         //свойства для доступа к полям
+        [DataMember]
         public string Manufacturer
         {
             get
@@ -51,7 +52,7 @@ namespace InformationCarrierFDS
             }
         }
 
-
+        [DataMember]
         public string Model
         {
             get
@@ -64,6 +65,7 @@ namespace InformationCarrierFDS
             }
         }
 
+        [DataMember]
         public string MediaName
         {
             get
@@ -76,7 +78,7 @@ namespace InformationCarrierFDS
             }
         }
 
-
+        [DataMember]
         public double Capacity
         {
             get
@@ -89,7 +91,7 @@ namespace InformationCarrierFDS
             }
         }
 
-
+        [DataMember]
         public int Count
         {
             get
@@ -101,7 +103,7 @@ namespace InformationCarrierFDS
                 count = value;
             }
         }
-
+        
         public InfoCarrier()
         {
         }

@@ -13,9 +13,9 @@ namespace InformationCarrierFDS
     public class Flash : InfoCarrier
     {
         //скорость USB
-        [DataMember]
         protected double speedUSB;
-    
+
+        [DataMember]
         public double SpeedUSB
         {
             get
@@ -27,6 +27,7 @@ namespace InformationCarrierFDS
                 speedUSB = value;
             }
         }
+        // для XML-сериализации необходим конструктор по умолчанию
         public Flash() { }
 
         public Flash(string man, string mod, string med, double cap, int c, double sp) : base( man,  mod,  med,  cap,  c) 

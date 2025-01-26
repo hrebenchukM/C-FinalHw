@@ -11,6 +11,9 @@ namespace PriceList
     {
         List<InfoCarrier> objects = new List<InfoCarrier>();
 
+        
+
+
         //• добавление носителя информации в список;
         public void Add(InfoCarrier inf)
         {
@@ -18,27 +21,29 @@ namespace PriceList
             objects.Add(inf);
         }
         //• удаление носителя информации из списка по заданному критерию;
-        public void RemoveByCriterion(string name, object value)
+        public void RemoveCarrierByCriterion(string criterionName, string criterionValue)
         {
-            objects.RemoveAll(inf => MatchCriterion(inf, name, value));
+            if (objects.Count == 0)
+            {
+                Console.WriteLine("Список пуст. Удаление невозможно.");
+                return;
+            }
+
+            objects.RemoveAll(item =>
+                (criterionName == "Model" && item.Model == criterionValue) ||
+                (criterionName == "Manufacturer" && item.Manufacturer == criterionValue) ||
+                (criterionName == "MediaName" && item.MediaName == criterionValue) ||
+                (criterionName == "Capacity" && item.Capacity.ToString() == criterionValue) ||
+                (criterionName == "Count" && item.Count.ToString() == criterionValue) ||
+                (criterionName == "SpeedUSB" && item is Flash flash && flash.SpeedUSB.ToString() == criterionValue) ||
+                (criterionName == "SpeedWrite" && item is DVD dvd && dvd.SpeedWrite.ToString() == criterionValue) ||
+                (criterionName == "SpeedSpindle" && item is HDD hdd && hdd.SpeedSpindle.ToString() == criterionValue)
+            );
+
+            Console.WriteLine("Удаление носителя информации завершено.");
         }
 
-        private bool MatchCriterion(InfoCarrier inf, string name, object value)
-        {
-            switch (name)
-            {
-                case "Manufacturer":
-                    return inf.Manufacturer == (string)value;
-                case "Model":
-                    return inf.Model == (string)value;
-                case "Capacity":
-                    return inf.Capacity == (double)value;
-                case "Count":
-                    return inf.Count == (int)value;
-                default:
-                    return false;
-            }
-        }
+
 
 
 
@@ -62,54 +67,121 @@ namespace PriceList
         }
 
         //• изменение определённых параметров носителя информации;
-        public void EditInfo(string name, object oldValue, object newValue)
+        public void EditInfo(string criterionName, string criterionValue, string newCriterion, string newValue)
         {
-            var editObj = objects.Where(inf => MatchCriterion(inf, name, oldValue)).ToList();
-
-            foreach (var obj in editObj)
+            if (objects.Count == 0)
             {
-                switch (name)
+                Console.WriteLine("Список пуст. Изменение невозможно");
+                return;
+            }
+
+            var objectsEdit = objects.Where(item =>
+                (criterionName == "Model" && item.Model == criterionValue) ||
+                (criterionName == "Manufacturer" && item.Manufacturer == criterionValue) ||
+                (criterionName == "MediaName" && item.MediaName == criterionValue) ||
+                (criterionName == "Capacity" && item.Capacity.ToString() == criterionValue) ||
+                (criterionName == "Count" && item.Count.ToString() == criterionValue) ||
+                (criterionName == "SpeedUSB" && item is Flash flash && flash.SpeedUSB.ToString() == criterionValue) ||
+                (criterionName == "SpeedWrite" && item is DVD dvd && dvd.SpeedWrite.ToString() == criterionValue) ||
+                (criterionName == "SpeedSpindle" && item is HDD hdd && hdd.SpeedSpindle.ToString() == criterionValue)
+            ).ToList();
+
+            if (objectsEdit.Count == 0)
+            {
+                Console.WriteLine("Носители информации по заданному критерию не найдены");
+                return;
+            }
+
+
+
+            foreach (var obj in objectsEdit)
+            {
+                switch (newCriterion)
                 {
-                    case "Manufacturer":
-                        obj.Manufacturer = (string)newValue;
-                        break;
                     case "Model":
-                        obj.Model = (string)newValue;
+                        obj.Model = newValue;
+                        break;
+                    case "Manufacturer":
+                        obj.Manufacturer = newValue;
+                        break;
+                    case "MediaName":
+                        obj.MediaName = newValue;
                         break;
                     case "Capacity":
-                        obj.Capacity = (double)newValue;
+                        if (double.TryParse(newValue, out double newCapacity))
+                            obj.Capacity = newCapacity;
+                        else
+                            Console.WriteLine("Неправильное значение для Capacity.");
                         break;
                     case "Count":
-                        obj.Count = (int)newValue;
+                        if (int.TryParse(newValue, out int newCount))
+                            obj.Count = newCount;
+                        else
+                            Console.WriteLine("Неправильное значение для Count.");
+                        break;
+                    case "SpeedUSB":
+                        if (obj is Flash flashCarrier && double.TryParse(newValue, out double newSpeedUSB))
+                            flashCarrier.SpeedUSB = newSpeedUSB;
+                        else
+                            Console.WriteLine("Неправильное значение для SpeedUSB или носитель не является Flash.");
+                        break;
+                    case "SpeedWrite":
+                        if (obj is DVD dvdCarrier && int.TryParse(newValue, out int newSpeedWrite))
+                            dvdCarrier.SpeedWrite = newSpeedWrite;
+                        else
+                            Console.WriteLine("Неправильное значение для SpeedWrite или носитель не является DVD.");
+                        break;
+                    case "SpeedSpindle":
+                        if (obj is HDD hddCarrier && int.TryParse(newValue, out int newSpeedSpindle))
+                            hddCarrier.SpeedSpindle = newSpeedSpindle;
+                        else
+                            Console.WriteLine("Неправильное значение для SpeedSpindle или носитель не является HDD.");
                         break;
                     default:
-                        Console.WriteLine("Не найдент параметр для изменения");
+                        Console.WriteLine("Критерий не найден: {0}", newCriterion);
                         break;
                 }
             }
-        }
 
+            Console.WriteLine("Изменение параметров завершено.");
+        }
 
 
 
 
 
         //• поиск носителя информации по заданному критерию;
-        public List<InfoCarrier> SearchByCriterion(string name, object value)
+        public List<InfoCarrier> SearchCarrierByCriterion(string criterionName, string criterionValue)
         {
-            var res = objects.Where(inf => MatchCriterion(inf, name, value)).ToList();
-
-            if (res.Count == 0)
+            if (objects.Count == 0)
             {
-                Console.WriteLine("Не найдено носителя информации по заданному критерию");
+                Console.WriteLine("Список пуст. Поиск невозможен.");
+                return new List<InfoCarrier>();
+            }
+
+            var res = objects.Where(item =>
+                (criterionName == "Model" && item.Model == criterionValue) ||
+                (criterionName == "Manufacturer" && item.Manufacturer == criterionValue) ||
+                (criterionName == "MediaName" && item.MediaName == criterionValue) ||
+                (criterionName == "Capacity" && item.Capacity.ToString() == criterionValue) ||
+                (criterionName == "Count" && item.Count.ToString() == criterionValue) ||
+                (criterionName == "SpeedUSB" && item is Flash flash && flash.SpeedUSB.ToString() == criterionValue) ||
+                (criterionName == "SpeedWrite" && item is DVD dvd && dvd.SpeedWrite.ToString() == criterionValue) ||
+                (criterionName == "SpeedSpindle" && item is HDD hdd && hdd.SpeedSpindle.ToString() == criterionValue)
+            ).ToList();
+
+            if (res.Count > 0)
+            {
+                Console.WriteLine("Найдено {0} носителей", res.Count);
             }
             else
             {
-                Console.WriteLine("Найдено {0} объект(ов) по заданному критерию.", res.Count);
+                Console.WriteLine("Носители информации по заданному критерию не найдены");
             }
 
             return res;
         }
+
 
 
 

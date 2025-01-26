@@ -13,9 +13,9 @@ namespace InformationCarrierFDS
     public class HDD : InfoCarrier
     {
         //скорость вращения шпинделя
-        [DataMember]
         protected int speedSpindle;
 
+        [DataMember]
         public int SpeedSpindle
         {
             get
@@ -27,7 +27,7 @@ namespace InformationCarrierFDS
                 speedSpindle = value;
             }
         }
-
+        // для XML-сериализации необходим конструктор по умолчанию
         public HDD() { }
         public HDD(string man, string mod, string med, double cap, int c, int sp) : base(man, mod, med, cap, c)
         {
