@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Formatters.Soap;
 using System.Runtime.Serialization.Json;
 using System.Xml.Serialization;
 using System.Xml.Linq;
+using System.IO;
 
 namespace InformationCarrierFDS
 {
@@ -121,13 +122,36 @@ namespace InformationCarrierFDS
             return "Manufacturer: " + Manufacturer + ", Model: " + Model + ", MediaName: " + MediaName + ", Capacity: " + Capacity + "GB, Count: " + Count + ", ";
         }
 
-        public virtual void Load() 
+      
+        public virtual void Load(StreamReader sr)
         {
-         
+            MediaName = sr.ReadLine();
+            Console.WriteLine("MediaName: {0}", MediaName);
+
+            Manufacturer = sr.ReadLine();
+            Console.WriteLine("Manufacturer: {0}", Manufacturer);
+
+            Model = sr.ReadLine();
+            Console.WriteLine("Model: {0}", Model);
+
+            Capacity = double.Parse(sr.ReadLine());
+            Console.WriteLine("Capacity: {0}", Capacity);
+
+            Count = int.Parse(sr.ReadLine());
+            Console.WriteLine("Count: {0}", Count);
         }
-        public virtual void Save() 
+
+
+
+        public virtual void Save(StreamWriter sw)
         {
-        
+            sw.WriteLine(MediaName);
+            sw.WriteLine(Manufacturer);
+            sw.WriteLine(Model);
+            sw.WriteLine(Capacity);
+            sw.WriteLine(Count);
         }
+
+      
     }
 }

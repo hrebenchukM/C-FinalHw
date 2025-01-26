@@ -39,13 +39,23 @@ namespace InformationCarrierFDS
             return base.Report() + "Speed Write: " + SpeedWrite + "x";
         }
 
-        public override void Load() 
+
+
+        public override void Load(StreamReader sr)
         {
-            Console.WriteLine("Загрузка данных на DVD-диск {0} ", Manufacturer);
+            base.Load(sr);
+            SpeedWrite = int.Parse(sr.ReadLine());
+
+            Console.WriteLine("SpeedWrite: {0}", SpeedWrite);
+
         }
-        public override void Save() 
+        public override void Save(StreamWriter sw)
         {
-             Console.WriteLine("Загрузка данных на DVD-диск {0} ", Manufacturer);
+            base.Save(sw);
+            sw.WriteLine(SpeedWrite);
         }
+
+
+
     }
 }

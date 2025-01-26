@@ -188,12 +188,72 @@ namespace PriceList
 
 
         //• считывание данных из файла и запись данных в файл.
-        public void SaveFile(string path, ISerialize serializer)
+        public void SaveFile(string path)
+        {
+            StreamWriter sw = new StreamWriter(path);
+            foreach (var inf in objects)
+            {
+                inf.Save(sw);
+
+            }
+            sw.Close();
+        }
+
+        public void LoadFile(string path)
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                try
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        InfoCarrier inf = null;
+
+                        // Определяем тип носителя
+                        switch (line)
+                        {
+                            case "Flash":
+                                inf = new Flash();
+                                break;
+                            case "DVD":
+                                inf = new DVD();
+                                break;
+                            case "HDD":
+                                inf = new HDD();
+                                break;
+                            default:
+                                throw new Exception($"Неизвестный тип носителя данных: {line}");
+                        }
+
+                        // Загружаем данные
+                        if (inf != null)
+                        {
+                            inf.Load(sr);
+                            objects.Add(inf);
+                            sr.ReadLine();//пропуск пустой строки
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Ошибка загрузки данных: {e.Message}");
+                }
+            }
+            Console.WriteLine("Загрузка данных завершена.");
+        }
+
+
+
+
+
+
+        public void Serialize(string path, ISerialize serializer)
         {
             Console.WriteLine("• запись данных в файл ");
             serializer.Save(path, objects);
         }
-        public void LoadFile(string path, ISerialize serializer)
+        public void Deserialize(string path, ISerialize serializer)
         {
             Console.WriteLine("• считывание данных из файла ");
             serializer.Load(path,objects);

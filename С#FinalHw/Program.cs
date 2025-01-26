@@ -5,6 +5,8 @@ using InformationCarrierFDS;
 using System.Reflection;
 using System.Xml.Linq;
 using Serialize;
+using System.IO;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 internal class Program
 {
     private static void Main(string[] args)
@@ -12,8 +14,7 @@ internal class Program
         try
         {
             PriceListBoss priceList = new PriceListBoss();
-            ILog log = new ConsoleLog();
-
+           
             while (true)
             {
             Console.WriteLine("1.Добавление носителя информации в список");
@@ -21,9 +22,12 @@ internal class Program
             Console.WriteLine("3. Печать списка");
             Console.WriteLine("4. Изменение определённых параметров носителя информации");
             Console.WriteLine("5. Поиск носителя информации по заданному критерию");
-            Console.WriteLine("6. Считывание данных из файла");
-            Console.WriteLine("7. Запись данных в файл");
-            Console.WriteLine("0.Выход");
+            Console.WriteLine("6. Десериализация");
+            Console.WriteLine("7. Сериализация");
+            Console.WriteLine("8. Считывание данных из текстового файла");
+            Console.WriteLine("9. Запись данных в текстовый файл");
+
+                Console.WriteLine("0.Выход");
             Console.Write("Выберите пунктик: ");
 
             string words = Console.ReadLine();
@@ -91,8 +95,28 @@ internal class Program
 
 
                 case "3"://Печать списка
-                    priceList.PrintList(log);
-                break;
+                        //ILog log1 = new ConsoleLog();
+                        //priceList.PrintList(log1);
+                        Console.WriteLine("Выберете способ печати (например: ConsoleLog/FileLog): ");
+
+                        string choiceP = Console.ReadLine();
+                        switch (choiceP)
+                        {
+                            case "ConsoleLog":
+                                ILog log1 = new ConsoleLog();
+                                priceList.PrintList(log1);
+                                break;
+
+                            case "FileLog":
+                                ILog log2 = new FileLog("data.txt");
+                                priceList.PrintList(log2);
+                                break;
+
+                            default:
+                                Console.WriteLine("Неверный способ");
+                                return;
+                        }
+                        break;
 
                 case "4"://Изменение определённых параметров носителя информации
                         Console.WriteLine("Введите название критерия для поиска (например: Model, Manufacturer, MediaName, Capacity, Count, SpeedUSB, SpeedWrite, SpeedSpindle): ");
@@ -126,9 +150,8 @@ internal class Program
                         break;
 
 
-                case "6"://Считывание данных из файла
-                  
-                    Console.Write("Прочитать файл: ");
+                case "6"://Десериализация
+
                     Console.Write("Введите способ: (Xml/Json/Soap) ");
                     string ser_nameL = Console.ReadLine();
 
@@ -157,13 +180,12 @@ internal class Program
                     string pathL = Console.ReadLine();
 
 
-                    priceList.LoadFile(pathL, serializerL);
+                    priceList.Deserialize(pathL, serializerL);
                     Console.WriteLine("Загружено.");
 
                     break;
 
-                case "7"://Запись данных в файл
-                    Console.Write("Записать файл: ");
+                case "7"://Сериализация
                     Console.Write("Введите способ: (Xml/Json/Soap) ");
                     string ser_nameS = Console.ReadLine();
 
@@ -191,14 +213,29 @@ internal class Program
                     Console.Write("Введите путь (.xml/.json): ");
                     string pathS = Console.ReadLine();
 
-                    priceList.SaveFile(pathS, serializerS);
+                    priceList.Serialize(pathS, serializerS);
                     Console.WriteLine("сохранено.");
 
-                    break;
+                break;
 
-              
+                case "8"://Считывание данных из файла
+                        Console.Write("Введите путь (.txt): ");
+                        string pathLT = Console.ReadLine();
+                        priceList.LoadFile(pathLT);
+                        break;
+
+
+
+                case "9"://Запись данных в файл
+                        Console.Write("Введите путь (.txt): ");
+                        string pathST = Console.ReadLine();
+                        priceList.SaveFile(pathST);
+                        break;
+
+
+
                 case "0"://Выход
-                    return;
+                return;
 
                 default:
                     Console.WriteLine("Ошибочка");

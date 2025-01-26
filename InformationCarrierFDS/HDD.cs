@@ -40,13 +40,18 @@ namespace InformationCarrierFDS
             return base.Report() + "Speed Spindle: " + SpeedSpindle + "RPM";
         }
 
-        public override void Load() 
+        public override void Load(StreamReader sr)
         {
-            Console.WriteLine("Загрузка данных на съемный HDD {0} ", Manufacturer);
+            base.Load(sr);
+            SpeedSpindle = int.Parse(sr.ReadLine());
+
+            Console.WriteLine("SpeedSpindle: {0}", SpeedSpindle);
         }
-        public override void Save() 
+        public override void Save(StreamWriter sw)
         {
-           Console.WriteLine("Загрузка данных на съемный HDD {0} ", Manufacturer);
+            base.Save(sw);
+            sw.WriteLine(SpeedSpindle);
         }
+
     }
 }

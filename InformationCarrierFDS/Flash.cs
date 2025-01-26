@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -41,14 +42,17 @@ namespace InformationCarrierFDS
            return base.Report()+ "Speed USB: " + SpeedUSB + "MB/sec";
         }
 
-        public override void Load()
+        public override void Load(StreamReader sr)
         {
-            Console.WriteLine("Загрузка данных на Flash-память {0} ", Manufacturer);
-        }
-        public override void Save() 
-        {
-          Console.WriteLine("Загрузка данных на Flash-память {0} ", Manufacturer);
+            base.Load(sr);
+            SpeedUSB = double.Parse(sr.ReadLine());
 
+            Console.WriteLine("SpeedUSB: {0}", SpeedUSB);
+        }
+        public override void Save(StreamWriter sw) 
+        {
+            base.Save(sw);
+            sw.WriteLine(SpeedUSB);
         }
 
     }
